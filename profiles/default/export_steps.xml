@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<export-steps>
+ <export-step id="comment"
+              handler="Products.CPSComment.exportimport.exportCommentTool"
+              title="Comment Tool">
+  Export comment tool
+ </export-step>
+</export-steps>

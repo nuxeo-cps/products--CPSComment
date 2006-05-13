@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<object name="CPSComment" meta_type="IOBTree Graph">
+ <relation name="hasComment" meta_type="IOBTree Relation">
+  <property name="prefix">cps</property>
+  <property name="subject_prefix">docid</property>
+  <property name="object_prefix">comment</property>
+ </relation>
+ <relation name="hasReply" meta_type="IOBTree Relation">
+  <property name="prefix">cps</property>
+  <property name="subject_prefix">comment</property>
+  <property name="object_prefix">comment</property>
+ </relation>
+</object>

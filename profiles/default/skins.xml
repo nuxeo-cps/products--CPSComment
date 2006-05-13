@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<object name="portal_skins">
+ <object name="cpscomment_default" meta_type="Filesystem Directory View"
+    directory="CPSComment/skins/cpscomment_default"/>
+ <skin-path name="CPSSkins">
+  <layer name="cpscomment_default" insert-after="cps_default"/>
+ </skin-path>
+ <skin-path name="CPSSkins-macroless">
+  <layer name="cpscomment_default" insert-after="cps_default"/>
+ </skin-path>
+</object>

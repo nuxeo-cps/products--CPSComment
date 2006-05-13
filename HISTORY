@@ -1,0 +1,144 @@
+*******************************************
+** CPSComment V0.3.2 [R1 build 2006/05/05-14:47 by anahide]
+** SVN URL: https://svn.nuxeo.org/pub/CPSComment/trunk Revision: 45304
+Requires:
+~~~~~~~~~
+-
+New features:
+~~~~~~~~~~~~~
+-
+Bug fixes:
+~~~~~~~~~~
+- Comment tool export crashed.
+New internal features:
+~~~~~~~~~~~~~~~~~~~~~~
+-
+
+*******************************************
+** CPSComment V0.3.1 [R1 build 2006/03/30-02:16 by anahide]
+** SVN URL: https://svn.nuxeo.org/pub/CPSComment/trunk Revision: 34814
+Requires:
+~~~~~~~~~
+-
+New features:
+~~~~~~~~~~~~~
+- Added Spanish translation.
+Bug fixes:
+~~~~~~~~~~
+- Modifying a comment indexed it with a wrong path in catalog.
+- Comments are not indexed anymore.
+- The ModifyPortalContent permission, required for datamodel commit, was
+  missing on comments.
+New internal features:
+~~~~~~~~~~~~~~~~~~~~~~
+- Installer does not use CPSInstaller anymore, it calls the setup tool and
+  imports the CPSRelation and CPSComment extension profile.
+
+
+*******************************************
+** CPSComment V0.3.0 [R1 build 2006/03/08-15:49 by anahide]
+** SVN URL: https://svn.nuxeo.org/pub/CPSComment/trunk Revision: 34174
+Requires:
+~~~~~~~~~
+-
+New features:
+~~~~~~~~~~~~~
+- Added possibility to delete a comment.
+Bug fixes:
+~~~~~~~~~~
+- Comments were deleted when re-publishing a commented document.
+- Do not raise an error when deleting a comment that is not found.
+- Comment icon was missing.
+- Comment identifiers are chosen among free repository docids so that there is
+  no collision between proxies and comments unique identifiers.
+New internal features:
+~~~~~~~~~~~~~~~~~~~~~~
+- API changes.
+- Be able to specify an id when creating a comment ; useful for tests.
+
+*******************************************
+** CPSComment V0.2.2 [R1 build 2006/03/02-18:07 by anahide]
+** SVN URL: https://svn.nuxeo.org/pub/CPSComment/trunk Revision: 33751
+Requires:
+~~~~~~~~~
+-
+New features:
+~~~~~~~~~~~~~
+-
+Bug fixes:
+~~~~~~~~~~
+- Fixed guard for portlet displaying comments
+New internal features:
+~~~~~~~~~~~~~~~~~~~~~~
+-
+
+*******************************************
+** CPSComment V0.2.1 [R1 build 2006/02/24-13:45 by anahide]
+** SVN URL: https://svn.nuxeo.org/pub/CPSComment/trunk Revision: 33454
+Requires:
+~~~~~~~~~
+-
+New features:
+~~~~~~~~~~~~~
+-
+Bug fixes:
+~~~~~~~~~~
+- Portlet showing comments crashed on non-proxy objects like the portal.
+- Extension profile did not set up translations.
+- Useless actions have been removed.
+- Comments and relations were not deleted when document was deleted
+New internal features:
+~~~~~~~~~~~~~~~~~~~~~~
+- Tool is now called portal_comment to avoid collision with portal_discussion.
+- Comment portal type name has been changed into 'Comment' instead of
+  'CPS Comment'.
+
+*******************************************
+** CPSComment V0.2.0 [R1 build 2006/02/17-14:49 by anahide]
+** SVN URL: https://svn.nuxeo.org/pub/CPSComment/trunk Revision: 32943
+Requires:
+~~~~~~~~~
+-
+New features:
+~~~~~~~~~~~~~
+- Added extension profile
+Bug fixes:
+~~~~~~~~~~
+-
+New internal features:
+~~~~~~~~~~~~~~~~~~~~~~
+-
+
+*******************************************
+** CPSComment V0.1.1 [R1 build 2006/02/16-14:36 by anahide]
+** SVN URL: https://svn.nuxeo.org/pub/CPSComment/trunk Revision: 32892
+Requires:
+~~~~~~~~~
+-
+New features:
+~~~~~~~~~~~~~
+-
+Bug fixes:
+~~~~~~~~~~
+- Comments were not displayed in the document page
+- Comment tool was not installed as an action provider
+New internal features:
+~~~~~~~~~~~~~~~~~~~~~~
+-
+
+*******************************************
+** CPSComment V0.1.0 [R1 build 2006/02/01-18:12 by anahide]
+** SVN URL: https://svn.nuxeo.org/pub/CPSComment/trunk Revision: 32504
+Requires:
+~~~~~~~~~
+-
+New features:
+~~~~~~~~~~~~~
+- Added skeleton for comments management
+Bug fixes:
+~~~~~~~~~~
+-
+New internal features:
+~~~~~~~~~~~~~~~~~~~~~~
+-
+

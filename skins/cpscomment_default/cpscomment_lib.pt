@@ -1,0 +1,122 @@
+<tal:comment tal:condition="nothing">
+$Id$
+</tal:comment>
+
+<metal:block define-macro="comment_add"
+  tal:define="
+    type_name request/type_name|string:Comment;
+    document nocall:document|nocall:here;
+    rendered_main python:document.cpsdocument_create_render(request=request,
+                                                            type_name=type_name);
+    form_action string:cpscomment_create;
+    creation python:True;
+    edition python:False;
+    metadata metadata|nothing;">
+  <metal:block use-macro="here/cpscomment_lib/macros/comment_css" />
+  <metal:block use-macro="here/cpscomment_lib/macros/comment_javascript" />
+  <metal:block use-macro="here/cpscomment_lib/macros/comment_edit_form" />
+</metal:block>
+
+<metal:block define-macro="comment_css">
+  <link rel="Stylesheet" type="text/css" href=""
+    tal:define="base_url python:here.portal_url.getBaseUrl()"
+    tal:attributes="href string:${base_url}document.css" />
+</metal:block>
+
+<metal:block define-macro="comment_javascript">
+  <tal:block condition="python:modules['Products.CPSUtil.integration'].isProductPresent('Products.FCKeditor')">
+    <script type="text/javascript">
+      var popup_editor_form = 'popup_fckeditor_form';
+      var width = 640;
+      var height = 520;
+    </script>
+  </tal:block>
+  <tal:block condition="python:modules['Products.CPSUtil.integration'].isProductPresent('Products.Epoz')">
+    <script type="text/javascript">
+      var popup_editor_form = 'popup_rte_form';
+      var width = 640;
+      var height = 480;
+    </script>
+  </tal:block>
+  <script type="text/javascript">
+   function popup_rte(input_id, label_edit) {
+     var args, value;
+     value = document.getElementById(input_id).value;
+     args = '?input_id='+input_id+'&amp;label_edit='+escape(label_edit);
+     str_window_features = 'toolbar=0,scrollbars=0,location=0,statusbar=0,menubar=0,resizable=1,dependent=1,width=' + width + ',height=' + height;
+     popup = window.open(popup_editor_form + args, input_id, str_window_features);
+     if (!popup.opener) {
+       popup.opener = window;
+     }
+     return false;
+   }
+  </script>
+</metal:block>
+
+
+<metal:block define-macro="comment_edit_form">
+  <form action="ACTION" method="post" id="editForm"
+        enctype="multipart/form-data" class="workflow"
+        tal:attributes="action form_action">
+    <div class="group">
+      <div class="documentFields">
+        <tal:block define="getFormUidHtml nocall:modules/Products.CPSDocument.utils/getFormUidHtml"
+                   replace="structure python:getFormUidHtml(request)"/>
+        <input type="hidden" name="type_name" value="VALUE"
+               tal:condition="creation"
+               tal:attributes="value type_name" />
+        <input type="hidden" name="reply_id" value="VALUE"
+               tal:condition="python:creation and request.get('reply_id')"
+               tal:attributes="value request/reply_id" />
+        <input type="hidden" name="comment_id" value="VALUE"
+               tal:condition="edition"
+               tal:attributes="value request/comment_id" />
+        <div id="rendered_main" tal:content="structure rendered_main">
+          CONTENT
+        </div>
+      </div>
+      <tal:block define="cpsmcat nocall:cpsmcat|nocall:here/translation_service">
+        <metal:block
+          use-macro="here/cpsdocument_edit_buttons/macros/buttons"/>
+      </tal:block>
+    </div>
+  </form>
+  <div id="ajax_psm" style="display:none">
+    ajax feedback
+  </div>
+</metal:block>
+
+<metal:block define-macro="view_comments">
+  <tal:block define="
+    document nocall:document|nocall:here;
+    cluster cluster|string:listed;
+    ctool nocall:here/portal_comment;
+    comments python:ctool.getComments(document);
+    allowed python:ctool.isDiscussionAllowedFor(document);
+    here_url document/absolute_url;
+    ">
+    <tal:block condition="allowed">
+      <div id="show_add_form" style="display:block">
+        <a tal:attributes="
+           href string:javascript:toggleLayers('show_add_form', 'add_form')"
+           i18n:translate="cpscomment_label_show_add_form">
+           Show add form
+        </a>
+      </div>
+      <div id="add_form" style="display:none">
+        <a tal:attributes="
+           href string:javascript:toggleLayers('add_form', 'show_add_form')"
+           i18n:translate="cpscomment_label_hide_add_form">
+           Hide add form
+        </a>
+        <metal:block use-macro="here/cpscomment_lib/macros/comment_add"/>
+      </div>
+    </tal:block>
+    <div tal:repeat="comment comments" class="comment_box">
+      <tal:block content="structure
+        python:comment.render(layout_mode='view', cluster=cluster)">
+        CONTENT
+      </tal:block>
+    </div>
+  </tal:block>
+</metal:block>

@@ -1,0 +1,22 @@
+===============
+CPSComment TODO
+===============
+
+:Author: Anahide Tchertchian <at@nuxeo.com>
+:Revision: $Id$
+
+
+- Be able to delete comments
+- migration script for CPSForum comments
+- events management for features/cleaning operations
+- indexing (?)
+- documentation
+
+
+
+.. Emacs
+.. Local Variables:
+.. mode: rst
+.. End:
+.. Vim
+.. vim: set filetype=rst:

@@ -1,0 +1,102 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: CPSComment-en\n"
+"POT-Creation-Date: 2006-03-06 14:18default\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: Anahide Tchertchian <at@nuxeo.com>\n"
+"Language-Team: Name <email>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=ISO-8859-15\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Preferred-encodings: latin9\n"
+"Language-Code: en\n"
+"Language-Name: English\n"
+"Domain: default\n"
+
+#.   <a content="action/name" attributes="href action/url" class="button">
+#.           Action
+#.         </a>
+#: from ../skins/cpscomment_default/layout_comment_listed_view.pt
+msgid "Action"
+msgstr ""
+
+#.   <block>
+#.             Deletion of ${title (tal content="comment/title_or_id")}
+#.           </block>
+#: from ../skins/cpscomment_default/cpscomment_delete_form.pt
+msgid "Deletion of ${title}"
+msgstr "Deletion of ${title}"
+
+#.   <p>
+#.           Deletion message
+#.         </p>
+#: from ../skins/cpscomment_default/cpscomment_delete_form.pt
+msgid "comment_deletion_message"
+msgstr "Please confirm deletion of this message."
+
+#.   <a attributes="
+#.              href string:javascript:toggleLayers('add_form', 'show_add_form')">
+#.              Hide add form
+#.           </a>
+#: from ../skins/cpscomment_default/cpscomment_lib.pt
+msgid "cpscomment_label_hide_add_form"
+msgstr "Hide the add form"
+
+#.   <a attributes="
+#.              href string:javascript:toggleLayers('show_add_form', 'add_form')">
+#.              Show add form
+#.           </a>
+#: from ../skins/cpscomment_default/cpscomment_lib.pt
+msgid "cpscomment_label_show_add_form"
+msgstr "Add a comment"
+
+# types labels
+msgid "portal_type_comment_title"
+msgstr "Comment"
+
+msgid "portal_type_comment_description"
+msgstr " "
+
+# widgets labels
+msgid "cpscomment_label_author"
+msgstr "Author: "
+
+msgid "cpscomment_label_comment"
+msgstr "Comment: "
+
+msgid "cpscomment_listed_label_author"
+msgstr "- created by"
+
+msgid "cpscomment_listed_label_time_creation_date"
+msgstr "on"
+
+msgid "cpscomment_listed_label_time_last_modified"
+msgstr "- modified on"
+
+# actions
+msgid "action_allow_discussion"
+msgstr "Allow discussion"
+
+msgid "action_disallow_discussion"
+msgstr "Disallow discussion"
+
+msgid "action_add_comment"
+msgstr "Add comment"
+
+msgid "action_reply"
+msgstr "Reply"
+
+msgid "psm_comments_allowed"
+msgstr "Comments allowed"
+
+msgid "psm_comments_disallowed"
+msgstr "Comments disallowed"
+
+msgid "psm_comment_created"
+msgstr "Comment created"
+
+msgid "psm_comment_changed"
+msgstr "Comment changed"
+
+msgid "psm_comment_deleted"
+msgstr "Comment deleted"

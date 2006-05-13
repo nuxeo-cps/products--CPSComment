@@ -1,0 +1,26 @@
+<tal:block define="cells options/cells;
+                   mode options/mode;
+                   ds options/datastructure;
+                   dm ds/getDataModel;
+">
+  <table tal:condition="python:mode == 'view'">
+    <tr>
+    <td tal:repeat="cell cells">
+      <tal:block condition="python:cell['widget_mode'] != 'hidden'"
+                 define="widget cell/widget">
+        <div tal:attributes="class cell/css_class|nothing;
+                             id python:widget.getHtmlWidgetId()+'_widget';
+                            ">
+          <tal:block condition="widget/label">
+            <tal:block i18n:translate="" tal:condition="widget/is_i18n"
+                  tal:content="widget/label">label</tal:block>
+            <tal:block tal:condition="not:widget/is_i18n"
+                  tal:content="widget/label">label</tal:block>
+          </tal:block>
+          <tal:block replace="structure cell/widget_rendered" />
+        </div>
+      </tal:block>
+    </td>
+    </tr>
+  </table>
+</tal:block>

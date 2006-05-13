@@ -1,0 +1,18 @@
+<tal:comment condition="nothing">
+  Display the comment actions just below the comment rendering
+</tal:comment>
+<metal:block use-macro="here/layout_lib_div_view/macros/div_view" />
+<tal:block define="
+  atool nocall:here/portal_actions;
+  actions python:atool.listFilteredActionsFor(here).get('comment', ());
+  ">
+  <tal:block repeat="action actions">
+    <a class="button"
+       i18n:translate=""
+       tal:content="action/name"
+       tal:attributes="href action/url">
+      Action
+    </a>
+  </tal:block>
+</tal:block>
+

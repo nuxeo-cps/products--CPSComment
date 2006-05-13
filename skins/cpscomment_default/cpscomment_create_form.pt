@@ -1,0 +1,21 @@
+<tal:block define="
+    type_name request/type_name;
+    rendered_main python:here.cpscomment_create_render(request=request,
+                                                       type_name=type_name);
+    form_action string:cpscomment_create;
+    creation python:True;
+    edition python:False;
+    metadata metadata|nothing;
+    ">
+  <metal:block use-macro="here/main_template/macros/master">
+    <metal:block fill-slot="style_slot">
+      <metal:block use-macro="here/cpscomment_lib/macros/comment_css" />
+    </metal:block>
+    <metal:block fill-slot="javascript_head_slot">
+      <metal:block use-macro="here/cpscomment_lib/macros/comment_javascript" />
+    </metal:block>
+    <metal:block fill-slot="main">
+      <metal:block use-macro="here/cpscomment_lib/macros/comment_edit_form" />
+    </metal:block>
+  </metal:block>
+</tal:block>

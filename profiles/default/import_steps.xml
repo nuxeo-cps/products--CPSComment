@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<import-steps>
+ <import-step id="comment" version="20060216-01"
+              handler="Products.CPSComment.exportimport.importCommentTool"
+              title="Comment Tool">
+  <dependency step="toolset"/>
+  <!-- add dependencies to event service -->
+  Import comment tool
+ </import-step>
+</import-steps>

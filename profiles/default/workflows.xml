@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<object name="portal_workflow">
+ <object name="comment" meta_type="CPS Workflow"/>
+ <bindings>
+  <default/>
+  <type type_id="Comment">
+   <bound-workflow workflow_id="comment"/>
+  </type>
+ </bindings>
+</object>

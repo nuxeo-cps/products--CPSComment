@@ -1,0 +1,28 @@
+<tal:block define="
+    comment_id request/comment_id;
+    ctool nocall:here/portal_comment;
+    comment python:ctool.getComment(comment_id, here);
+    ">
+  <metal:block use-macro="here/main_template/macros/master">
+    <metal:block fill-slot="style_slot">
+      <metal:block use-macro="here/cpscomment_lib/macros/comment_css" />
+    </metal:block>
+    <metal:block fill-slot="main">
+      <h1>
+        <tal:block i18n:translate="">
+          Deletion of <span i18n:name="title" tal:content="comment/title_or_id">Comment Title</span>
+        </tal:block>
+      </h1>
+      <p i18n:translate="comment_deletion_message">
+        Deletion message
+      </p>
+      <form action="cpscomment_delete" method="post">
+        <input type="hidden" name="comment_id"
+          tal:attributes="value comment_id" />
+        <input type="submit" class="destructive"
+          value="button_delete"
+          i18n:attributes="value" />
+      </form>
+    </metal:block>
+  </metal:block>
+</tal:block>

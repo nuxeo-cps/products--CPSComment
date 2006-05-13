@@ -1,0 +1,49 @@
+<?xml version="1.0"?>
+<cps-workflow workflow_id="comment"
+              title="CPS Workflow Definition"
+              state_variable="review_state"
+              meta_type="CPS Workflow">
+ <permission>Add Comment</permission>
+ <permission>Delete Comment</permission>
+ <permission>Edit Comment</permission>
+ <permission>Modify portal content</permission>
+ <permission>View Comment</permission>
+ <state state_id="visible" title="Visible">
+  <permission-map name="Delete Comment" acquired="False">
+   <permission-role>Manager</permission-role>
+   <permission-role>SectionManager</permission-role>
+   <permission-role>WorkspaceManager</permission-role>
+   <permission-role>Owner</permission-role>
+  </permission-map>
+  <permission-map name="Edit Comment" acquired="False">
+   <permission-role>Manager</permission-role>
+   <permission-role>SectionManager</permission-role>
+   <permission-role>WorkspaceManager</permission-role>
+   <permission-role>Owner</permission-role>
+  </permission-map>
+  <permission-map name="Modify portal content" acquired="False">
+   <permission-role>Manager</permission-role>
+   <permission-role>SectionManager</permission-role>
+   <permission-role>WorkspaceManager</permission-role>
+   <permission-role>Owner</permission-role>
+  </permission-map>
+  <permission-map name="View Comment" acquired="False">
+   <permission-role>Manager</permission-role>
+   <permission-role>SectionManager</permission-role>
+   <permission-role>SectionReviewer</permission-role>
+   <permission-role>SectionReader</permission-role>
+   <permission-role>WorkspaceManager</permission-role>
+   <permission-role>WorkspaceMember</permission-role>
+   <permission-role>WorkspaceReader</permission-role>
+   <permission-role>Owner</permission-role>
+  </permission-map>
+ </state>
+ <transition transition_id="create" title="Create a comment"
+             new_state="visible" trigger="USER"
+             before_script="" after_script="">
+  
+  <guard>
+  </guard>
+  <transition-behavior behavior_id="initial-create"/>
+ </transition>
+</cps-workflow>

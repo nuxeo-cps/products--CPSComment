@@ -1,0 +1,28 @@
+========================
+CPSComment customization
+========================
+
+:Author: Anahide Tchertchian <at@nuxeo.com>
+:Revision: $Id$
+
+
+TODO : explain the permissions/roles machinery
+
+Roles and permissions
+=====================
+
+Permissions
+-----------
+
+Workflow
+--------
+
+
+.. Emacs
+.. Local Variables:
+.. mode: rst
+.. End:
+.. Vim
+.. vim: set filetype=rst:
+
+

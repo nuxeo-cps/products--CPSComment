@@ -1,0 +1,129 @@
+=========================
+CPSComment specifications
+=========================
+
+:Author: Anahide Tchertchian <at@nuxeo.com>
+:Revision: $Id$
+
+
+Contents
+========
+
+* `Functional specifications`_
+* `Technical specifications`_
+
+
+Functional specifications
+=========================
+
+- Be able to chose whether documents can be commented or not: a manager on
+  the document can decide if comments are allowed or not. Some documenty
+  types can be configured to allow comments by default. In the future, a
+  property on the section/workspace could be controling this behaviour for
+  subdocuments.
+- When a document is discussable, be able to add a comment using an HTML
+  editor.
+- Be able to edit its own comment, or others' comments if user is a manager.
+- Be able to collapse some of the comments individually.
+- Comments are presented listed by date by default, but they can also be
+  viewed threaded.
+- No moderation feature, just be able to delete unwanted comments.
+- Comments are not visible on every document by default, but this can be
+  changed so that comments are only visible on workspaces, for instance.
+
+
+Technical specifications
+========================
+
+Comments
+--------
+
+Comments are CPSDocument instances, so that they're rendered using the
+schema/layout mechanism. They also follow the Discussable and
+DiscussionResponse interfaces from CMFCore.
+
+A comment schema contains the following fields: author, date, title,
+description.
+
+A language attribute can be added so that comment is marked as being
+French/English...
+
+
+Links between documents and comments
+------------------------------------
+
+CPSRelation features are used to provide links between documents (proxies)
+and related comments.
+
+A new tool called portal_comments is used for that purpose. It follows the
+portal_discussion interface from CMFCore and stores the actual comments.
+
+Relations will be stored within IOBtreeGraph objects (see CPSRelation
+features), so document ids will have to be integers: comments are set on a
+document proxy, not on a document revision in the repository.
+
+Other labeled relations can be used to set links between comments themselves
+(answering relations, for instance, to be able to get a thread of comments).
+
+
+Comments presentation
+---------------------
+
+Comments on a document can be listed by date or by thread.
+If comments exist in different languages, a filter on these comments could
+be useful.
+
+
+Security
+--------
+
+Security on comments is evaluated in the context of the proxy they're linked
+to. No direct access to comments is allowed.
+
+New permissions to manage comments are defined to control the following
+operations:
+
+- Add a comment
+- View a comment
+- Edit a comment
+- Delete a comment
+
+These permissions are mapped to existing local roles in a default CPS site.
+
+
+Moreover, comments follow a workflow defining what existing roles
+(WorkspaceManager, SectionReader, etc...) have the right to perform
+operations.
+
+This default workflow has two identified states : public/private. A private
+comment can be seen as a moderated comment.
+
+
+Cleaning operations
+-------------------
+
+The comments tool has to take care of obsolete comments (comments related to
+documents that have been deleted, for instance). This is achieved using the
+event service features.
+
+
+Comments indexing
+-----------------
+
+No indexing is done right now, comments could be referenced in the catalog
+like archived revisions are. This is not a priority.
+
+
+Upgrade
+-------
+
+CPSComment will provide a migration script to be able to migrate comments
+made using CPSForum.
+
+
+.. Emacs
+.. Local Variables:
+.. mode: rst
+.. End:
+.. Vim
+.. vim: set filetype=rst:

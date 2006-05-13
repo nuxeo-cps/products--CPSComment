@@ -1,0 +1,71 @@
+# Gettext Message File for default.
+# Your Name <your@email>, Year
+msgid ""
+msgstr ""
+"Project-Id-Version: default\n"
+"POT-Creation-Date: 2006-01-16 18:55default\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: Your Name <your@email>\n"
+"Language-Team: Name <email>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"Language-code: LL\n"
+"Language-name: Language\n"
+"Preferred-encodings: utf-8 latin1\n"
+"Domain: default\n"
+
+# types labels
+msgid "portal_type_comment_title"
+msgstr ""
+
+msgid "portal_type_comment_description"
+msgstr ""
+
+# widgets labels
+msgid "cpscomment_label_author"
+msgstr ""
+
+msgid "cpscomment_label_comment"
+msgstr ""
+
+msgid "cpscomment_listed_label_author"
+msgstr ""
+
+msgid "cpscomment_listed_label_time_creation_date"
+msgstr ""
+
+msgid "cpscomment_listed_label_time_last_modified"
+msgstr ""
+
+# actions
+msgid "action_allow_discussion"
+msgstr ""
+
+msgid "action_disallow_discussion"
+msgstr ""
+
+msgid "action_add_comment"
+msgstr ""
+
+msgid "action_reply"
+msgstr ""
+
+# status messages
+
+msgid "psm_comments_allowed"
+msgstr ""
+
+msgid "psm_comments_disallowed"
+msgstr ""
+
+msgid "psm_comment_created"
+msgstr ""
+
+msgid "psm_comment_changed"
+msgstr ""
+
+msgid "psm_comment_deleted"
+msgstr ""
+

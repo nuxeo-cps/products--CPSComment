@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<rolemap>
+  <!-- roles has to be set, GenericSetup bug -->
+  <roles>
+    <role name="Manager"/>
+  </roles>
+  <permissions>
+    <!-- setup AddComment permission mapping at the portal level since it is
+         not done at the comment workflow level. -->
+    <permission name="Add Comment" acquire="False">
+      <role name="Manager"/>
+      <role name="Owner"/>
+      <role name="WorkspaceManager"/>
+      <role name="WorkspaceMember"/>
+      <role name="SectionManager"/>
+      <role name="SectionReviewer"/>
+    </permission>
+  </permissions>
+</rolemap>

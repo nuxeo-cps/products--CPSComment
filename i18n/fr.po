@@ -1,0 +1,102 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: CPSComment-fr\n"
+"POT-Creation-Date: 2006-03-06 14:18default\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: Anahide Tchertchian <at@nuxeo.com>\n"
+"Language-Team: Name <email>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=ISO-8859-15\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Preferred-encodings: latin9\n"
+"Language-Code: fr\n"
+"Language-Name: French\n"
+"Domain: default\n"
+
+#.   <a content="action/name" attributes="href action/url" class="button">
+#.           Action
+#.         </a>
+#: from ../skins/cpscomment_default/layout_comment_listed_view.pt
+msgid "Action"
+msgstr ""
+
+#.   <block>
+#.             Deletion of ${title (tal content="comment/title_or_id")}
+#.           </block>
+#: from ../skins/cpscomment_default/cpscomment_delete_form.pt
+msgid "Deletion of ${title}"
+msgstr "Suppression de ${title}"
+
+#.   <p>
+#.           Deletion message
+#.         </p>
+#: from ../skins/cpscomment_default/cpscomment_delete_form.pt
+msgid "comment_deletion_message"
+msgstr "Merci de confirmer la suppression de ce commentaire."
+
+#.   <a attributes="
+#.              href string:javascript:toggleLayers('add_form', 'show_add_form')">
+#.              Hide add form
+#.           </a>
+#: from ../skins/cpscomment_default/cpscomment_lib.pt
+msgid "cpscomment_label_hide_add_form"
+msgstr "Cacher le formulaire"
+
+#.   <a attributes="
+#.              href string:javascript:toggleLayers('show_add_form', 'add_form')">
+#.              Show add form
+#.           </a>
+#: from ../skins/cpscomment_default/cpscomment_lib.pt
+msgid "cpscomment_label_show_add_form"
+msgstr "Ajouter un commentaire"
+
+# types labels
+msgid "portal_type_comment_title"
+msgstr "Commentaire"
+
+msgid "portal_type_comment_description"
+msgstr " "
+
+# widgets labels
+msgid "cpscomment_label_author"
+msgstr "Auteur : "
+
+msgid "cpscomment_label_comment"
+msgstr "Commentaire : "
+
+msgid "cpscomment_listed_label_author"
+msgstr "- créé par"
+
+msgid "cpscomment_listed_label_time_creation_date"
+msgstr "le"
+
+msgid "cpscomment_listed_label_time_last_modified"
+msgstr "- modifié le"
+
+# actions
+msgid "action_allow_discussion"
+msgstr "Autoriser les commentaires"
+
+msgid "action_disallow_discussion"
+msgstr "Interdire les commentaires"
+
+msgid "action_add_comment"
+msgstr "Commenter"
+
+msgid "action_reply"
+msgstr "Répondre"
+
+msgid "psm_comments_allowed"
+msgstr "Commentaires autorisés"
+
+msgid "psm_comments_disallowed"
+msgstr "Commentaires interdits"
+
+msgid "psm_comment_created"
+msgstr "Commentaire créé"
+
+msgid "psm_comment_changed"
+msgstr "Commentaire modifié"
+
+msgid "psm_comment_deleted"
+msgstr "Commentaire supprimé"

@@ -1,0 +1,4 @@
+<?xml version="1.0"?>
+<object name="portal_relations">
+ <object name="CPSComment" meta_type="IOBTree Graph"/>
+</object>

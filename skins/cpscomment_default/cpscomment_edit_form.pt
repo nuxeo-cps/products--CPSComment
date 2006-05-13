@@ -1,0 +1,21 @@
+<tal:block define="
+    comment_id request/comment_id;
+    ctool nocall:here/portal_comment;
+    comment python:ctool.getComment(comment_id, here);
+    rendered_main python:comment.cpsdocument_edit_render(request=request);
+    form_action string:cpscomment_edit;
+    creation python:False;
+    edition python:True;
+    ">
+  <metal:block use-macro="here/main_template/macros/master">
+    <metal:block fill-slot="style_slot">
+      <metal:block use-macro="here/cpscomment_lib/macros/comment_css" />
+    </metal:block>
+    <metal:block fill-slot="javascript_head_slot">
+      <metal:block use-macro="here/cpscomment_lib/macros/comment_javascript" />
+    </metal:block>
+    <metal:block fill-slot="main">
+      <metal:block use-macro="here/cpscomment_lib/macros/comment_edit_form" />
+    </metal:block>
+  </metal:block>
+</tal:block>

@@ -1,0 +1,49 @@
+<?xml version="1.0"?>
+<object name="Comment" meta_type="CPS Flexible Type Information"
+   xmlns:i18n="http://xml.zope.org/namespaces/i18n">
+ <property name="title">portal_type_comment_title</property>
+ <property name="description">portal_type_comment_description</property>
+ <property name="content_icon">discussionitem_icon.png</property>
+ <property name="content_meta_type">CPS Comment</property>
+ <property name="product">CPSComment</property>
+ <property name="factory">addComment</property>
+ <property name="immediate_view">view</property>
+ <property name="global_allow">True</property>
+ <property name="filter_content_types">False</property>
+ <property name="allowed_content_types"/>
+ <property name="allow_discussion">True</property>
+ <property name="cps_is_searchable">True</property>
+ <property name="cps_proxy_type"></property>
+ <property name="cps_display_as_document_in_listing">True</property>
+ <property name="schemas">
+  <element value="comment"/>
+  <element value="metadata"/>
+ </property>
+ <property name="layouts">
+  <element value="comment"/>
+ </property>
+ <property name="layout_clusters">
+  <element value="metadata:metadata"/>
+  <element value="listed:comment_listed"/>
+  <element value="threaded:comment_threaded"/>
+ </property>
+ <property name="flexible_layouts"/>
+ <property name="storage_methods"/>
+ <property name="cps_is_portlet">False</property>
+ <action title="action_reply" action_id="reply" category="comment"
+    condition_expr="python:portal.portal_comment.isDiscussionAllowedFor(object)"
+    url_expr="python:object.getProxy().absolute_url() + '/cpscomment_create_form?type_name=Comment&amp;reply_id=' + object.getId()"
+    visible="True"/>
+ <action title="action_edit" action_id="edit_comment" category="comment"
+    condition_expr=""
+    url_expr="python:object.getProxy().absolute_url() + '/cpscomment_edit_form?comment_id=' + object.getId()"
+    visible="True">
+  <permission value="Edit Comment"/>
+ </action>
+ <action title="action_delete" action_id="delete_comment" category="comment"
+    condition_expr=""
+    url_expr="python:object.getProxy().absolute_url() + '/cpscomment_delete_form?comment_id=' + object.getId()"
+    visible="True">
+  <permission value="Delete Comment"/>
+ </action>
+</object>

@@ -1,0 +1,93 @@
+<?xml version="1.0"?>
+<object name="comment" meta_type="CPS Layout">
+ <property name="layout_create_method"></property>
+ <property name="layout_edit_method"></property>
+ <property name="layout_view_method"></property>
+ <property name="style_prefix">layout_default_</property>
+ <property name="flexible_widgets"/>
+ <property name="validate_values_expr"></property>
+ <widget name="CreationDate" meta_type="DateTime Widget">
+  <property name="fields">
+   <element value="CreationDate"/>
+  </property>
+  <property name="label">time_creation_date</property>
+  <property name="label_edit">time_creation_date</property>
+  <property name="is_i18n">True</property>
+  <property name="readonly_layout_modes">
+   <element value="create"/>
+   <element value="edit"/>
+  </property>
+  <property name="hidden_layout_modes">
+   <element value="create"/>
+  </property>
+  <property name="view_format">long</property>
+ </widget>
+ <widget name="ModificationDate" meta_type="DateTime Widget">
+  <property name="fields">
+   <element value="ModificationDate"/>
+  </property>
+  <property name="label">time_last_modified</property>
+  <property name="label_edit">time_last_modified</property>
+  <property name="is_i18n">True</property>
+  <property name="readonly_layout_modes">
+   <element value="create"/>
+   <element value="edit"/>
+  </property>
+  <property name="hidden_layout_modes">
+   <element value="create"/>
+  </property>
+  <property
+     name="hidden_if_expr">python:datamodel.get('CreationDate').strftime('%m/%d/%Y %H:%M') == datamodel.get('ModificationDate').strftime('%m/%d/%Y %H:%M')</property>
+  <property name="view_format">long</property>
+ </widget>
+ <widget name="Title" meta_type="String Widget">
+  <property name="fields">
+   <element value="Title"/>
+  </property>
+  <property name="is_required">True</property>
+  <property name="label">label_title</property>
+  <property name="label_edit">label_title</property>
+  <property name="is_i18n">True</property>
+  <property name="display_width">72</property>
+  <property name="size_max">200</property>
+ </widget>
+ <widget name="author" meta_type="String Widget">
+  <property name="fields">
+   <element value="author"/>
+  </property>
+  <property name="is_required">True</property>
+  <property name="label">cpscomment_label_author</property>
+  <property name="label_edit">cpscomment_label_author</property>
+  <property name="is_i18n">True</property>
+  <property
+     name="widget_mode_expr">python:layout_mode != 'create' and 'view' or portal.portal_membership.isAnonymousUser() and 'edit' or 'hidden'</property>
+  <property name="display_width">40</property>
+  <property name="size_max">50</property>
+ </widget>
+ <widget name="comment" meta_type="Text Widget">
+  <property name="fields">
+   <element value="comment"/>
+  </property>
+  <property name="label_edit">cpscomment_label_comment</property>
+  <property name="is_i18n">True</property>
+  <property name="width">72</property>
+  <property name="render_format">html</property>
+ </widget>
+ <table>
+  <row>
+   <cell name="author"/>
+  </row>
+  <row>
+   <cell name="CreationDate"/>
+  </row>
+  <row>
+   <cell name="ModificationDate"/>
+  </row>
+  <row>
+   <cell name="Title"/>
+  </row>
+  <row>
+   <cell name="comment"/>
+  </row>
+ </table>
+</object>

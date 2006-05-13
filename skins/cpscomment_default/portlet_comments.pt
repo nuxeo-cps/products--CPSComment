@@ -1,0 +1,4 @@
+<tal:block define="document python:options['context_obj']">
+  <metal:block
+    use-macro="here/cpscomment_lib/macros/view_comments" />
+</tal:block>
