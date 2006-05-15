@@ -38,7 +38,7 @@ from Products.CMFCore.ActionProviderBase import ActionProviderBase
 from Products.CMFCore.interfaces import IDiscussionTool
 
 from Products.CPSCore.CPSTypes import TypeConstructor, TypeContainer
-from Products.CPSCore.ProxyBase import ProxyBase
+from Products.CPSCore.interfaces import ICPSProxy
 
 from Products.CPSRelation.interfaces import IVersionHistoryResource
 from Products.CPSRelation.node import PrefixedResource
@@ -46,6 +46,7 @@ from Products.CPSRelation.statement import Statement
 
 from Products.CPSComment.permissions \
      import AddComment, ViewComment, EditComment, DeleteComment
+from Products.CPSComment.interfaces import IComment
 from Products.CPSComment.comment import Comment
 from Products.CPSComment.commentresource import getCommentResource
 
@@ -204,7 +205,7 @@ class CommentTool(UniqueObject, TypeConstructor, TypeContainer,
     def isDiscussable(self, object):
         """Return True if given object is a proxy
         """
-        if isinstance(object, (ProxyBase, Comment)):
+        if ICPSProxy.providedBy(object) or IComment.providedBy(object):
             res = True
         else:
             res = False
@@ -404,10 +405,10 @@ class CommentTool(UniqueObject, TypeConstructor, TypeContainer,
         """Standard event hook.
         """
         if event_type == 'sys_del_object':
-            if isinstance(object, Comment):
-                self._deleteComment(object)
-            elif isinstance(object, ProxyBase):
+            if ICPSProxy.providedBy(object):
                 self._cleanCommentsOf(object)
+            elif IComment.providedBy(object):
+                self._deleteComment(object)
 
     # ZMI
 

@@ -23,15 +23,20 @@
 """
 
 import random
+
+import zope.interface
+
 from OFS.Folder import Folder
 from BTrees.OOBTree import OOBTree
-from Products.CPSCore.ProxyBase import ProxyBase
+from Products.CPSCore.interfaces import ICPSProxy
 from Products.CPSComment.comment import Comment, COMMENT_PORTAL_TYPE
 
 # Fake doc has to be a proxy because this is tested in comment tool to know if
 # document can be discussed, and because its interface is used to create its
 # resource.
-class FakeDocument(Folder, ProxyBase):
+class FakeDocument(Folder):
+
+    zope.interface.implements(ICPSProxy)
 
     def __init__(self, id, portal_type='Document', **kw):
         self.id = id
@@ -43,7 +48,7 @@ class FakeDocument(Folder, ProxyBase):
         else:
             self.docid = '0'
 
-    def getDocId(self):
+    def getDocid(self):
         return self.docid
 
     def getTypeInfo(self):
