@@ -195,10 +195,7 @@ class CommentTool(UniqueObject, TypeConstructor, TypeContainer,
         statement = Statement(self._getProxyResource(proxy),
                               PrefixedResource('cps', 'hasComment'),
                               self._getCommentResource(comment))
-        # XXX AT: strange acquisition problem: the graph __contains__ method is
-        # not found
-        from Acquisition import aq_base
-        return statement in aq_base(graph)
+        return graph.hasStatement(statement)
 
 
     security.declareProtected(View, 'isDiscussable')

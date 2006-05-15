@@ -214,7 +214,7 @@ class TestCommentTool(CPSCommentTestCase):
     def test_deleteComment(self):
         self._addTestRelations()
         comment_resource = CommentResource('1')
-        self.assertEquals(self.graph.containsResource(comment_resource),
+        self.assertEquals(self.graph.hasResource(comment_resource),
                           True)
         self.assertEquals(self.graph.getObjects(
             comment_resource, PrefixedResource('cps', 'hasReply')),
@@ -225,7 +225,7 @@ class TestCommentTool(CPSCommentTestCase):
         self.assertEquals(list(self.ctool.objectIds()), ['1', '2'])
         self.ctool.deleteComment('1', self.document)
         # check no reference left in the graph
-        self.assertEquals(self.graph.containsResource(comment_resource),
+        self.assertEquals(self.graph.hasResource(comment_resource),
                           False)
         # check document is actually deleted
         self.assertEquals(list(self.ctool.objectIds()), ['2'])
