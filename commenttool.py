@@ -303,6 +303,13 @@ class CommentTool(UniqueObject, TypeConstructor, TypeContainer,
         except KeyError:
             # not here
             pass
+        self._deleteCommentRelations(comment)
+
+
+    security.declarePrivate('_deleteCommentRelations')
+    def _deleteCommentRelations(self, comment):
+        """Delete the comment relations without security checks
+        """
         resource = self._getCommentResource(comment)
         graph = self._getCommentGraph()
         statements = graph.getStatements(
@@ -405,7 +412,7 @@ class CommentTool(UniqueObject, TypeConstructor, TypeContainer,
             if ICPSProxy.providedBy(object):
                 self._cleanCommentsOf(object)
             elif IComment.providedBy(object):
-                self._deleteComment(object)
+                self._deleteCommentRelations(object)
 
     # ZMI
 

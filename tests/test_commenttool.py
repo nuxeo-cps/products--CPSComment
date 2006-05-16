@@ -315,8 +315,8 @@ class TestCommentTool(CPSCommentTestCase):
                       PrefixedResource('cps', 'hasComment'),
                       CommentResource('1')),
             ])
-        # comment is deleted
-        self.assertEquals(list(self.ctool.objectIds()), ['1'])
+        # comment relations are deleted, comment is not
+        self.assertEquals(list(self.ctool.objectIds()), ['1', '2'])
 
 def test_suite():
     suite = unittest.TestSuite()
