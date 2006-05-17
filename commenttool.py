@@ -276,7 +276,7 @@ class CommentTool(UniqueObject, TypeConstructor, TypeContainer,
         # XXX old-style comment id, we will trigger a Zope 3 Interface when
         # CPSSubscriptions is compatible with it
         evtool = getEventService(self)
-        evtool.notify('comment_created', comment, {})
+        evtool.notify('comment_created', proxy, {})
 
         return str(comment_id)
 
