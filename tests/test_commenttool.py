@@ -42,6 +42,23 @@ from Products.CPSComment.commentresource import CommentResource
 from Products.CPSComment.tests.cpscomment_test_case import CPSCommentTestCase
 from Products.CPSComment.tests.fake import FakeDocument
 
+notified = 0
+
+def patched_notify(self, *args, **kw):
+    global notified
+    notified += 1
+
+def patch_event(function):
+    def wrap(*arg, **kw):
+        from Products.CPSCore.EventServiceTool import FakeEventService
+        old = FakeEventService.notify
+        FakeEventService.notify = patched_notify
+        try:
+            return function(*arg, **kw)
+        finally:
+            FakeEventService.notify = old
+    return wrap
+
 class TestCommentTool(CPSCommentTestCase):
 
     # fixture
@@ -317,6 +334,13 @@ class TestCommentTool(CPSCommentTestCase):
             ])
         # comment relations are deleted, comment is not
         self.assertEquals(list(self.ctool.objectIds()), ['1', '2'])
+
+    @patch_event
+    def test_eventSending(self):
+        # make sure an event is triggered when a comment is created
+        before = notified
+        self.test_createComment()
+        self.assertEquals(notified, before+1)
 
 def test_suite():
     suite = unittest.TestSuite()

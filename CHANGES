@@ -4,6 +4,7 @@ Requires:
 New features:
 ~~~~~~~~~~~~~
 - Implemented the CPSRelation abstraction branch
+- Added a 'comment_created' event when a comment is added
 Bug fixes:
 ~~~~~~~~~~
 -

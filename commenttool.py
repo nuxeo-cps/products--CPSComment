@@ -39,6 +39,7 @@ from Products.CMFCore.interfaces import IDiscussionTool
 
 from Products.CPSCore.CPSTypes import TypeConstructor, TypeContainer
 from Products.CPSCore.interfaces import ICPSProxy
+from Products.CPSCore.EventServiceTool import getEventService
 
 from Products.CPSRelation.interfaces import IVersionHistoryResource
 from Products.CPSRelation.node import PrefixedResource
@@ -271,6 +272,11 @@ class CommentTool(UniqueObject, TypeConstructor, TypeContainer,
                                         comment_resource))
         graph = self._getCommentGraph()
         graph.add(statements)
+
+        # XXX old-style comment id, we will trigger a Zope 3 Interface when
+        # CPSSubscriptions is compatible with it
+        evtool = getEventService(self)
+        evtool.notify('comment_created', comment, {})
 
         return str(comment_id)
 
