@@ -22,7 +22,9 @@
 """CPSComment interfaces
 """
 
-from Products.CMFCore.interfaces import IDiscussionResponse, IDiscussable
+from Products.CMFCore.interfaces import IDiscussionResponse
+from Products.CMFCore.interfaces import IDiscussable
+from Products.CMFCore.interfaces import IDiscussionTool
 from Products.CPSRelation.interfaces import IPrefixedResource
 
 class IComment(IDiscussionResponse, IDiscussable):
@@ -33,4 +35,8 @@ class ICommentResource(IPrefixedResource):
     """Interface for comment resource
 
     Local name has to be an integer
+    """
+
+class ICommentTool(IDiscussionTool):
+    """Interface for the comment tool
     """

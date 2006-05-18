@@ -5,7 +5,8 @@
   <adapter
       factory=".exportimport.CommentToolXMLAdapter"
       provides="Products.GenericSetup.interfaces.IBody"
-      for="Products.GenericSetup.interfaces.ISetupEnviron"
+      for=".interfaces.ICommentTool
+           Products.GenericSetup.interfaces.ISetupEnviron"
       />
 
   <adapter factory=".commentresource.getCommentResource" />

@@ -35,7 +35,6 @@ from Products.CMFCore.utils import _checkPermission
 from Products.CMFCore.permissions import ModifyPortalContent, View
 from Products.CMFCore.CMFBTreeFolder import CMFBTreeFolder
 from Products.CMFCore.ActionProviderBase import ActionProviderBase
-from Products.CMFCore.interfaces import IDiscussionTool
 
 from Products.CPSCore.CPSTypes import TypeConstructor, TypeContainer
 from Products.CPSCore.interfaces import ICPSProxy
@@ -48,6 +47,7 @@ from Products.CPSRelation.statement import Statement
 from Products.CPSComment.permissions \
      import AddComment, ViewComment, EditComment, DeleteComment
 from Products.CPSComment.interfaces import IComment
+from Products.CPSComment.interfaces import ICommentTool
 from Products.CPSComment.comment import Comment
 from Products.CPSComment.commentresource import getCommentResource
 
@@ -62,7 +62,7 @@ class CommentTool(UniqueObject, TypeConstructor, TypeContainer,
     # do not use 'CPS Discussion Tool' because it is used by CPSForum
     meta_type = 'CPS Comment Tool'
 
-    implements(IDiscussionTool)
+    implements(ICommentTool)
 
     security = ClassSecurityInfo()
 
