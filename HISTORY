@@ -1,4 +1,21 @@
 *******************************************
+** CPSComment V1.0.0-abstraction [R1 build 2006/05/23-20:24 by anahide]
+** SVN URL: https://svn.nuxeo.org/pub/CPS3/products/CPSComment/branches/abstraction Revision: 45893
+Requires:
+~~~~~~~~~
+-
+New features:
+~~~~~~~~~~~~~
+- Implemented the CPSRelation abstraction branch
+- Added a 'comment_created' event when a comment is added
+Bug fixes:
+~~~~~~~~~~
+-
+New internal features:
+~~~~~~~~~~~~~~~~~~~~~~
+-
+
+*******************************************
 ** CPSComment V0.3.2 [R1 build 2006/05/05-14:47 by anahide]
 ** SVN URL: https://svn.nuxeo.org/pub/CPSComment/trunk Revision: 45304
 Requires:
