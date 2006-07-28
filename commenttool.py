@@ -353,6 +353,7 @@ class CommentTool(UniqueObject, TypeConstructor, TypeContainer,
                     pass
                 else:
                     comments.append(comment)
+        # XXX AT: should be sorted (?)
         return comments
 
 

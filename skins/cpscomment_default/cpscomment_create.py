@@ -35,11 +35,15 @@ if is_valid:
     comment = context.createCPSComment(type_name, ds.getDataModel(), reply_id)
     url = context.absolute_url()
     action = comment.getTypeInfo().immediate_view
+    if action == 'view':
+        action = ''
+    else:
+        action = '/' + action
     psm = 'psm_comment_created'
     args = {'comment_id': comment.getId()}
 else:
     url = context.absolute_url()
-    action = 'cpscomment_create_form'
+    action = '/cpscomment_create_form'
     psm = 'psm_content_error'
     args = {'type_name': type_name}
     if reply_id is not None:
@@ -47,5 +51,5 @@ else:
     args.update(getFormUidUrlArg(REQUEST))
 
 args['portal_status_message'] = psm
-url = url + '/' + action + '?' + urlencode(args)
+url = url + action + '?' + urlencode(args)
 REQUEST.RESPONSE.redirect(url)

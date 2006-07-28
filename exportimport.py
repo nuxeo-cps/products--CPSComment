@@ -23,6 +23,7 @@
 """
 
 from zope.component import adapts
+from zope.component import queryMultiAdapter
 from zope.interface import implements
 
 from Products.CMFCore.utils import getToolByName
@@ -38,6 +39,38 @@ COMMENT_TOOL = 'portal_comment'
 COMMENT_NAME = 'comments'
 
 
+def exportProperties(obj, parent_path, context):
+    """ Export properties
+    """
+    exporter = queryMultiAdapter((obj, context), IBody)
+    path = '%s%s' % (parent_path, obj.getId().replace(' ', '_'))
+    if exporter:
+        if exporter.name:
+            path = '%s%s' % (parent_path, exporter.name)
+        filename = '%s%s' % (path, exporter.suffix)
+        body = exporter.body
+        if body is not None:
+            context.writeDataFile(filename, body, exporter.mime_type)
+
+def importProperties(obj, parent_path, context):
+    """ Import properties
+    """
+    importer = queryMultiAdapter((obj, context), IBody)
+    path = '%s%s' % (parent_path, obj.getId().replace(' ', '_'))
+    __traceback_info__ = path
+    if importer:
+        if importer.name:
+            path = '%s%s' % (parent_path, importer.name)
+        filename = '%s%s' % (path, importer.suffix)
+        body = context.readDataFile(filename)
+        if body is None and filename == 'types.xml':
+            # BBB: for CMF 1.5 profiles
+            body = context.readDataFile('typestool.xml')
+        if body is not None:
+            importer.filename = filename # for error reporting
+            importer.body = body
+
+
 def exportCommentTool(context):
     """Export comment tool as a set of XML files.
     """
@@ -47,6 +80,7 @@ def exportCommentTool(context):
         logger = context.getLogger(COMMENT_NAME)
         logger.info("Nothing to export.")
         return
+    exportProperties(tool, '', context)
 
 
 def importCommentTool(context):
@@ -55,6 +89,7 @@ def importCommentTool(context):
     """
     site = context.getSite()
     tool = getToolByName(site, COMMENT_TOOL)
+    importProperties(tool, '', context)
 
 
 class CommentToolXMLAdapter(XMLAdapterBase, PropertyManagerHelpers):
@@ -64,6 +99,7 @@ class CommentToolXMLAdapter(XMLAdapterBase, PropertyManagerHelpers):
     implements(IBody)
 
     _LOGGER_ID = COMMENT_NAME
+    name = COMMENT_NAME
 
     def _exportNode(self):
         """Export the object as a DOM node.

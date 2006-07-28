@@ -6,7 +6,7 @@ New features:
 - Adding adapters to get discussable items from capsule documents
 Bug fixes:
 ~~~~~~~~~~
--
+- Comment tool properties were not imported correctly
 New internal features:
 ~~~~~~~~~~~~~~~~~~~~~~
 - Set comment graph synchronous
