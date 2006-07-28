@@ -50,7 +50,7 @@ class DiscussableCapsuleDocument(object):
 
     zope.interface.implements(IDiscussableContent)
 
-    property_name = 'dc:allowDiscussion'
+    property_name = 'ecm:allowDiscussion'
 
     def __init__(self, document):
         """Init
@@ -115,7 +115,7 @@ class DiscussableCapsuleProxy(object):
 
     zope.interface.implements(IDiscussableContent)
 
-    property_name = 'dc:allowDiscussion'
+    property_name = 'ecm:allowDiscussion'
 
     def __init__(self, proxy):
         """Init
