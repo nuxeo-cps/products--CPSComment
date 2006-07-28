@@ -10,5 +10,8 @@
       />
 
   <adapter factory=".commentresource.getCommentResource" />
+  <adapter factory=".discussable.getNotDiscussable" />
+  <adapter factory=".discussable.getDocumentDiscussable" />
+  <adapter factory=".discussable.getProxyDiscussable" />
 
 </configure>

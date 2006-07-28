@@ -73,6 +73,7 @@ class TestComment(CPSCommentTestCase):
 
     def test_createReply(self):
         self.assertEquals(list(self.ctool.objectIds()), ['1', '2'])
+        self.ctool.overrideDiscussionFor(self.document, False)
         self.assertRaises(Unauthorized,
                           self.comment.createReply,
                           title='truc', text='machin')

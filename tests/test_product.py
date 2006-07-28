@@ -28,15 +28,18 @@ from Products.CMFCore.utils import getToolByName
 
 from Products.CPSComment.tests.cpscomment_ftest_case import CPSCommentFTestCase
 from Products.CPSComment.commenttool import CommentTool
-
+from Products.CPSComment.comment import COMMENT_PORTAL_TYPE
 
 class CPSCommentTests(CPSCommentFTestCase):
 
+    def afterSetUp(self):
+        CPSCommentFTestCase.afterSetUp(self)
+        self.ctool = getToolByName(self.portal, CommentTool.id)
+
     def test_comment_tool(self):
-        ctool = getToolByName(self.portal, CommentTool.id)
-        self.assert_(isinstance(ctool, CommentTool))
-        self.assertEquals(ctool.id, CommentTool.id)
-        self.assertEquals(ctool.meta_type, CommentTool.meta_type)
+        self.assert_(isinstance(self.ctool, CommentTool))
+        self.assertEquals(self.ctool.id, CommentTool.id)
+        self.assertEquals(self.ctool.meta_type, CommentTool.meta_type)
 
     def test_default_relations(self):
         rtool = getToolByName(self.portal, 'portal_relations', None)
@@ -49,9 +52,32 @@ class CPSCommentTests(CPSCommentFTestCase):
             ]
         self.assertEquals(graph.listRelationIds(), relation_ids)
 
+    def test_createComment(self):
+        self.login('manager')
+        # allow discussion on related document
+        document = self.portal.workspaces
+        self.ctool.overrideDiscussionFor(document, True)
+        new_comment_id = self.ctool.createComment(document, COMMENT_PORTAL_TYPE)
+        new_comment = self.ctool.getComment(new_comment_id, document)
+        self.assertEquals(new_comment.portal_type, COMMENT_PORTAL_TYPE)
+        wftool = self.portal.portal_workflow
+        self.assertEquals(wftool.getInfoFor(new_comment, 'review_state'),
+                          'visible')
+
+    def test_discussable_objects(self):
+        portal = self.portal
+        ws = self.portal.workspaces
+        self.assertEquals(self.ctool.isDiscussable(portal), False)
+        self.assertEquals(self.ctool.isDiscussable(ws), True)
+        self.assertEquals(self.ctool.isDiscussionAllowedFor(portal), False)
+        self.assertEquals(self.ctool.isDiscussionAllowedFor(ws), False)
+        self.assertEquals(self.ctool.getComments(portal), [])
+        self.assertEquals(self.ctool.getComments(ws), [])
+
     # TODO
     #def test_default_permission_mappings(self):
     #    pass
+
 
 def test_suite():
     tests = []

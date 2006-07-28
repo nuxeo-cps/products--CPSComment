@@ -22,6 +22,8 @@
 """CPSComment interfaces
 """
 
+import zope.interface
+
 from Products.CMFCore.interfaces import IDiscussionResponse
 from Products.CMFCore.interfaces import IDiscussable
 from Products.CMFCore.interfaces import IDiscussionTool
@@ -40,3 +42,21 @@ class ICommentResource(IPrefixedResource):
 class ICommentTool(IDiscussionTool):
     """Interface for the comment tool
     """
+
+class IDiscussableContent(zope.interface.Interface):
+    """Interface for discussable document
+    """
+
+    content = zope.interface.Attribute("Original content")
+
+    def overrideDiscussionFor(allowDiscussion):
+        """Override discussability or clear the setting.
+        """
+
+    def isDiscussionAllowedFor():
+        """Get boolean indicating whether discussion is allowed.
+        """
+
+    def isDiscussable():
+        """Return True if can be discussed
+        """

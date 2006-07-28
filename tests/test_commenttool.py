@@ -86,7 +86,7 @@ class TestCommentTool(CPSCommentTestCase):
         type_info = self.document.getTypeInfo()
         self.assertEquals(type_info.allowDiscussion(), True)
         self.assertEquals(self.ctool.isDiscussionAllowedFor(self.document),
-                          False)
+                          True)
         # allow discussion on document
         self.ctool.overrideDiscussionFor(self.document, True)
         self.assertEquals(self.ctool.isDiscussionAllowedFor(self.document),
@@ -115,10 +115,6 @@ class TestCommentTool(CPSCommentTestCase):
     def test_isDiscussionAllowedFor(self):
         self.assertEquals(self.ctool.isDiscussionAllowedFor(self.comment),
                           True)
-        self.assertEquals(self.ctool.isDiscussionAllowedFor(self.document),
-                          False)
-        # allow discussion on it
-        self.ctool.overrideDiscussionFor(self.document, True)
         self.assertEquals(self.ctool.isDiscussionAllowedFor(self.document),
                           True)
 
@@ -197,6 +193,7 @@ class TestCommentTool(CPSCommentTestCase):
         self.assertEquals(self.ctool.getComments(self.document),
                           [self.comment, self.reply])
         self.assertEquals(list(self.ctool.objectIds()), ['1', '2'])
+        self.ctool.overrideDiscussionFor(self.document, False)
         self.assertRaises(Unauthorized,
                           self.ctool.createComment,
                           self.document,

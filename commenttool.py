@@ -44,10 +44,12 @@ from Products.CPSRelation.interfaces import IVersionHistoryResource
 from Products.CPSRelation.node import PrefixedResource
 from Products.CPSRelation.statement import Statement
 
-from Products.CPSComment.permissions \
-     import AddComment, ViewComment, EditComment, DeleteComment
+from Products.CPSComment.permissions import ViewComment
+from Products.CPSComment.permissions import EditComment
+from Products.CPSComment.permissions import DeleteComment
 from Products.CPSComment.interfaces import IComment
 from Products.CPSComment.interfaces import ICommentTool
+from Products.CPSComment.interfaces import IDiscussableContent
 from Products.CPSComment.comment import Comment
 from Products.CPSComment.commentresource import getCommentResource
 
@@ -83,14 +85,8 @@ class CommentTool(UniqueObject, TypeConstructor, TypeContainer,
     def overrideDiscussionFor(self, content, allowDiscussion):
         """Override discussability for the given object or clear the setting.
         """
-        if not _checkPermission(ModifyPortalContent, content):
-            raise Unauthorized("Cannot modify object %s"%(content,))
-
-        if allowDiscussion is None or allowDiscussion == 'None':
-            if hasattr(aq_base(content), 'allow_discussion'):
-                del content.allow_discussion
-        else:
-            content.allow_discussion = bool(allowDiscussion)
+        discussable = IDiscussableContent(content)
+        return discussable.overrideDiscussionFor(allowDiscussion)
 
 
     security.declareProtected(View, 'getDiscussionFor')
@@ -104,20 +100,8 @@ class CommentTool(UniqueObject, TypeConstructor, TypeContainer,
     def isDiscussionAllowedFor(self, content):
         """Get boolean indicating whether discussion is allowed for content.
         """
-        allow = False
-        # check permission to add comments in general
-        if _checkPermission(AddComment, content):
-            document = content.getContent()
-            if hasattr(aq_base(document), 'allow_discussion'):
-                # check permission to add comment on content
-                allow = bool(document.allow_discussion)
-            else:
-                # check permission to add comment on content type
-                ttool = getToolByName(self, 'portal_types')
-                type_info = ttool.getTypeInfo(content)
-                if type_info:
-                    allow = bool(type_info.allowDiscussion())
-        return allow
+        discussable = IDiscussableContent(content)
+        return discussable.isDiscussionAllowedFor()
 
     # API
 
@@ -203,11 +187,8 @@ class CommentTool(UniqueObject, TypeConstructor, TypeContainer,
     def isDiscussable(self, object):
         """Return True if given object is a proxy
         """
-        if ICPSProxy.providedBy(object) or IComment.providedBy(object):
-            res = True
-        else:
-            res = False
-        return res
+        discussable = IDiscussableContent(object)
+        return discussable.isDiscussable()
 
 
     security.declarePrivate('_getComment')
