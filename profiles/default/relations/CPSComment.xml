@@ -1,5 +1,6 @@
 <?xml version="1.0"?>
 <object name="CPSComment" meta_type="IOBTree Graph">
+ <property name="synchronous">True</property>
  <relation name="hasComment" meta_type="IOBTree Relation">
   <property name="prefix">cps</property>
   <property name="subject_prefix">docid</property>
