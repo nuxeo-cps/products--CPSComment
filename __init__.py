@@ -34,6 +34,10 @@ from Products.CPSComment.comment import Comment, addComment
 # register the node
 from Products.CPSComment import commentresource
 
+from Products.CPSUtil.testing.environment import setTestingEnvironmentIfNeeded
+
+# for tests
+setTestingEnvironmentIfNeeded()
 
 registerDirectory('skins', globals())
 

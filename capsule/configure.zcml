@@ -1,0 +1,7 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope">
+
+  <adapter factory=".discussable.getCapsuleDocumentDiscussable" />
+  <adapter factory=".discussable.getCapsuleProxyDiscussable" />
+
+</configure>

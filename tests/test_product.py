@@ -64,6 +64,8 @@ class CPSCommentTests(CPSCommentFTestCase):
         self.assertEquals(wftool.getInfoFor(new_comment, 'review_state'),
                           'visible')
 
+    # XXX AT: currently broken using capsule: default configuration using an
+    # IOBTreeGraph does not do the trick
     def test_discussable_objects(self):
         portal = self.portal
         ws = self.portal.workspaces

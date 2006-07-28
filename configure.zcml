@@ -1,6 +1,6 @@
 <configure
     xmlns="http://namespaces.zope.org/zope"
-    xmlns:five="http://namespaces.zope.org/five">
+    xmlns:zcml="http://namespaces.zope.org/zcml">
 
   <adapter
       factory=".exportimport.CommentToolXMLAdapter"
@@ -13,5 +13,10 @@
   <adapter factory=".discussable.getNotDiscussable" />
   <adapter factory=".discussable.getDocumentDiscussable" />
   <adapter factory=".discussable.getProxyDiscussable" />
+
+  <configure
+    zcml:condition="installed nuxeo.capsule">
+    <include package=".capsule"/>
+  </configure>
 
 </configure>
