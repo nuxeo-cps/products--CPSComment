@@ -279,7 +279,7 @@ class TestCommentTool(CPSCommentTestCase):
         self.assertEquals(all_statements, expected)
         self.assertEquals(list(self.ctool.objectIds()), ['1', '2'])
 
-        self.ctool.notify_event('sys_del_object', self.document, {})
+        self.folder.manage_delObjects(self.document.getId())
 
         # check no reference left in the graph
         self.assertEquals(self.graph.getStatements(), [])
@@ -304,7 +304,7 @@ class TestCommentTool(CPSCommentTestCase):
         self.assertEquals(all_statements, expected)
         self.assertEquals(list(self.ctool.objectIds()), ['1', '2'])
 
-        self.ctool.notify_event('sys_del_object', self.document, {})
+        self.folder.manage_delObjects(self.document.getId())
 
         # check no reference left in the graph
         self.assertEquals(self.graph.getStatements(), [statement])
@@ -321,7 +321,7 @@ class TestCommentTool(CPSCommentTestCase):
         self.assertEquals(all_statements, expected)
         self.assertEquals(list(self.ctool.objectIds()), ['1', '2'])
 
-        self.ctool.notify_event('sys_del_object', self.reply, {})
+        self.ctool.manage_delObjects(self.reply.getId())
 
         # check no reference left in the graph
         self.assertEquals(self.graph.getStatements(), [
@@ -329,8 +329,7 @@ class TestCommentTool(CPSCommentTestCase):
                       PrefixedResource('cps', 'hasComment'),
                       CommentResource('1')),
             ])
-        # comment relations are deleted, comment is not
-        self.assertEquals(list(self.ctool.objectIds()), ['1', '2'])
+        self.assertEquals(list(self.ctool.objectIds()), ['1'])
 
     @patch_event
     def test_eventSending(self):

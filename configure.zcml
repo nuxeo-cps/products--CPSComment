@@ -9,6 +9,18 @@
            Products.GenericSetup.interfaces.ISetupEnviron"
       />
 
+  <subscriber
+      for="Products.CPSComment.interfaces.IComment
+           OFS.interfaces.IObjectWillBeRemovedEvent"
+      handler=".events.handleCommentDeletedEvent"
+      />
+
+  <subscriber
+      for="Products.CPSCore.interfaces.ICPSProxy
+           OFS.interfaces.IObjectWillBeRemovedEvent"
+      handler=".events.handleCPSProxyDeletedEvent"
+      />
+
   <adapter factory=".commentresource.getCommentResource" />
   <adapter factory=".discussable.getNotDiscussable" />
   <adapter factory=".discussable.getDocumentDiscussable" />

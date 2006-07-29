@@ -11,3 +11,4 @@ New internal features:
 ~~~~~~~~~~~~~~~~~~~~~~
 - Set comment graph synchronous
 - Use adapters when manipulating discussable items
+- Use Zope3 events

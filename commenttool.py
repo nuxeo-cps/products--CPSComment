@@ -281,18 +281,6 @@ class CommentTool(UniqueObject, TypeConstructor, TypeContainer,
         return is_valid
 
 
-    security.declarePrivate('_deleteComment')
-    def _deleteComment(self, comment):
-        """Delete the comment and its relations without security checks
-        """
-        try:
-            self._delObject(comment.getId())
-        except KeyError:
-            # not here
-            pass
-        self._deleteCommentRelations(comment)
-
-
     security.declarePrivate('_deleteCommentRelations')
     def _deleteCommentRelations(self, comment):
         """Delete the comment relations without security checks
@@ -319,7 +307,7 @@ class CommentTool(UniqueObject, TypeConstructor, TypeContainer,
         else:
             if not _checkPermission(DeleteComment, comment):
                 raise Unauthorized("Cannot delete comment %s"%(comment,))
-            self._deleteComment(comment)
+            self.manage_delObjects(comment.getId())
 
 
     security.declareProtected(View, 'getQuotedContents')
@@ -368,13 +356,28 @@ class CommentTool(UniqueObject, TypeConstructor, TypeContainer,
     def _cleanCommentsOf(self, proxy):
         """Clean comments related to proxy
 
-        Useful when reeciving notifications of proxy deletion
+        Useful when receiving notifications of proxy deletion
         """
         proxy_resource = self._getProxyResource(proxy)
         if IVersionHistoryResource.providedBy(proxy_resource):
             # check first that no other proxies with this docid exist
-            pxtool = getToolByName(self, 'portal_proxies')
-            proxies = pxtool.listProxies(proxy_resource.docid)
+            capsule = False
+            try:
+                from nuxeo.capsule.interfaces import IDocument
+            except ImportError, err:
+                if sys.exc_info()[2].tb_next is not None:
+                    # ImportError was caused deeper
+                    raise
+            else:
+                if IDocument.providedBy(proxy):
+                    capsule = True
+            if capsule:
+                # FIXME AT: need to get all proxies for this version history +
+                # workspace document
+                proxies = [proxy]
+            else:
+                pxtool = getToolByName(self, 'portal_proxies')
+                proxies = pxtool.listProxies(proxy_resource.docid)
             if len(proxies) <= 1:
                 # delete only isolated comments related to this one
                 comments = self.getComments(proxy)
@@ -389,18 +392,15 @@ class CommentTool(UniqueObject, TypeConstructor, TypeContainer,
                                       PrefixedResource('cps', 'hasComment'),
                                       comment_resource)
                     if not graph.getStatements(other):
-                        self._deleteComment(comment)
+                        self.manage_delObjects(comment.getId())
 
-
+    # BBB, Zope3 events are used now
     security.declarePrivate('notify_event')
     def notify_event(self, event_type, object, infos):
         """Standard event hook.
         """
-        if event_type == 'sys_del_object':
-            if ICPSProxy.providedBy(object):
-                self._cleanCommentsOf(object)
-            elif IComment.providedBy(object):
-                self._deleteCommentRelations(object)
+        pass
+
 
     # ZMI
 

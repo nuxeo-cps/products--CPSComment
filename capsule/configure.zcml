@@ -4,4 +4,10 @@
   <adapter factory=".discussable.getCapsuleDocumentDiscussable" />
   <adapter factory=".discussable.getCapsuleProxyDiscussable" />
 
+  <subscriber
+      for="nuxeo.capsule.interfaces.IDocument
+           OFS.interfaces.IObjectWillBeRemovedEvent"
+      handler=".events.handleCapsuleDocumentDeletedEvent"
+      />
+
 </configure>
