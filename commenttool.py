@@ -41,6 +41,7 @@ from Products.CPSCore.CPSTypes import TypeConstructor, TypeContainer
 from Products.CPSCore.interfaces import ICPSProxy
 from Products.CPSCore.EventServiceTool import getEventService
 
+from Products.CPSRelation.interfaces import IVersionResource
 from Products.CPSRelation.interfaces import IVersionHistoryResource
 from Products.CPSRelation.node import PrefixedResource
 from Products.CPSRelation.statement import Statement
@@ -73,9 +74,15 @@ class CommentTool(UniqueObject, TypeConstructor, TypeContainer,
         {'id': 'graph_id', 'type': 'string', 'mode': 'w',
          'label': "Relations graph id",
          },
+        # XXX AT: this will not work using IOBTree graphs, because we only have
+        # the docid to identify a document -> will not be possible to attach
+        # comment to a specifi version
+        {'id': 'comment_version', 'type': 'boolean', 'mode': 'w',
+         'label': "Comment a document version (Redland needed)",
+         },
         )
     graph_id = 'CPSComment'
-
+    comment_version = False
 
     def __init__(self):
         CMFBTreeFolder.__init__(self, self.id)
@@ -120,10 +127,12 @@ class CommentTool(UniqueObject, TypeConstructor, TypeContainer,
     def _getProxyResource(self, proxy):
         """Get the resource to use for proxies
         """
-        # XXX AT: currently only version histories are handled, but a property
-        # on the tool could set the resource to versions if comments have to be
-        # linked to given revisions.
-        return IVersionHistoryResource(proxy)
+        if self.comment_version:
+            resource = IVersionResource(proxy)
+            print resource
+        else:
+            resource = IVersionHistoryResource(proxy)
+        return resource
 
 
     security.declarePrivate('_getCommentResource')
@@ -353,6 +362,7 @@ class CommentTool(UniqueObject, TypeConstructor, TypeContainer,
         raise NotImplementedError
 
 
+    # XXX AT: to refactor
     security.declarePrivate('_cleanCommentsOf')
     def _cleanCommentsOf(self, proxy):
         """Clean comments related to proxy
@@ -360,7 +370,10 @@ class CommentTool(UniqueObject, TypeConstructor, TypeContainer,
         Useful when receiving notifications of proxy deletion
         """
         proxy_resource = self._getProxyResource(proxy)
-        if IVersionHistoryResource.providedBy(proxy_resource):
+        if self.comment_version:
+            # only delete comments for given proxy
+            proxies = [proxy]
+        else:
             # check first that no other proxies with this docid exist
             capsule = False
             try:
@@ -379,21 +392,23 @@ class CommentTool(UniqueObject, TypeConstructor, TypeContainer,
             else:
                 pxtool = getToolByName(self, 'portal_proxies')
                 proxies = pxtool.listProxies(proxy_resource.docid)
-            if len(proxies) <= 1:
-                # delete only isolated comments related to this one
-                comments = self.getComments(proxy)
-                for comment in comments:
-                    graph = self._getCommentGraph()
-                    comment_resource = self._getCommentResource(comment)
-                    graph.remove([Statement(
-                        proxy_resource,
-                        PrefixedResource('cps', 'hasComment'),
-                        comment_resource)])
-                    other = Statement(None,
-                                      PrefixedResource('cps', 'hasComment'),
-                                      comment_resource)
-                    if not graph.getStatements(other):
-                        self.manage_delObjects(comment.getId())
+
+        if len(proxies) <= 1:
+            # delete only isolated comments related to this one
+            comments = self.getComments(proxy)
+            for comment in comments:
+                graph = self._getCommentGraph()
+                comment_resource = self._getCommentResource(comment)
+                graph.remove([Statement(
+                    proxy_resource,
+                    PrefixedResource('cps', 'hasComment'),
+                    comment_resource)])
+                other = Statement(None,
+                                  PrefixedResource('cps', 'hasComment'),
+                                  comment_resource)
+                if not graph.getStatements(other):
+                    self.manage_delObjects(comment.getId())
+
 
     # BBB, Zope3 events are used now
     security.declarePrivate('notify_event')

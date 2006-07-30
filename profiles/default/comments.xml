@@ -1,4 +1,5 @@
 <?xml version="1.0"?>
 <object name="portal_comments">
   <property name="graph_id">CPSComment</property>
+  <property name="comment_version">False</property>
 </object>

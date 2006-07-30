@@ -1,8 +1,13 @@
 <configure
     xmlns="http://namespaces.zope.org/zope">
 
+  <!-- XXX AT: adapters are not registered to allow redefining in third
+       party products -->
+
+  <!--
   <adapter factory=".discussable.getCapsuleDocumentDiscussable" />
   <adapter factory=".discussable.getCapsuleProxyDiscussable" />
+  -->
 
   <subscriber
       for="nuxeo.capsule.interfaces.IDocument
