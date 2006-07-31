@@ -129,7 +129,6 @@ class CommentTool(UniqueObject, TypeConstructor, TypeContainer,
         """
         if self.comment_version:
             resource = IVersionResource(proxy)
-            print resource
         else:
             resource = IVersionHistoryResource(proxy)
         return resource
