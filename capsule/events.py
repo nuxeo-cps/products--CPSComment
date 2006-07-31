@@ -22,5 +22,6 @@
 from Products.CMFCore.utils import getToolByName
 
 def handleCapsuleDocumentDeletedEvent(ob, event):
-    ctool = getToolByName(ob, 'portal_comment')
-    ctool._cleanCommentsOf(ob)
+    ctool = getToolByName(ob, 'portal_comment', None)
+    if ctool is not None:
+        ctool._cleanCommentsOf(ob)
