@@ -22,9 +22,11 @@
 from Products.CMFCore.utils import getToolByName
 
 def handleCommentDeletedEvent(ob, event):
-    ctool = getToolByName(ob, 'portal_comment')
-    ctool._deleteCommentRelations(ob)
+    ctool = getToolByName(ob, 'portal_comment', None)
+    if ctool is not None:
+        ctool._deleteCommentRelations(ob)
 
 def handleCPSProxyDeletedEvent(ob, event):
-    ctool = getToolByName(ob, 'portal_comment')
-    ctool._cleanCommentsOf(ob)
+    ctool = getToolByName(ob, 'portal_comment', None)
+    if ctool is not None:
+        ctool._cleanCommentsOf(ob)
