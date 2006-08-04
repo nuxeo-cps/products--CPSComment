@@ -170,7 +170,7 @@ class CommentTool(UniqueObject, TypeConstructor, TypeContainer,
     def _getWrappedComment(self, comment, proxy):
         """Get comment wrapped into the proxy context
         """
-        logger.debug("comment=%s, proxy=%s"%(comment, proxy))
+        #logger.debug("comment=%s, proxy=%s"%(comment, proxy))
         comment = aq_base(comment).__of__(proxy)
         if not _checkPermission(ViewComment, comment):
             raise Unauthorized("Cannot view comment %s"%(comment,))
@@ -332,7 +332,8 @@ class CommentTool(UniqueObject, TypeConstructor, TypeContainer,
 
 
     security.declareProtected(View, 'getComments')
-    def getComments(self, proxy):
+    def getComments(self, proxy, sorted=True, sort_on='CreationDate',
+                    reverse=False, limit=0):
         """Get comments for given proxy
         """
         comments = []
@@ -342,6 +343,7 @@ class CommentTool(UniqueObject, TypeConstructor, TypeContainer,
                 self._getProxyResource(proxy),
                 PrefixedResource('cps', 'hasComment'))
             # the comment resource local name is its id
+            loop = 0
             for comment_resource in comment_resources:
                 comment_id = comment_resource.localname
                 try:
@@ -350,7 +352,23 @@ class CommentTool(UniqueObject, TypeConstructor, TypeContainer,
                     pass
                 else:
                     comments.append(comment)
-        # XXX AT: should be sorted (?)
+                    loop += 1
+                    if limit and not sorted and loop >= limit:
+                        break
+        if sorted:
+            def cmp_comments(x, y):
+                info_x = getattr(aq_base(x), sort_on, x.getId())
+                info_y = getattr(aq_base(y), sort_on, y.getId())
+                if callable(info_x):
+                    info_x = info_x()
+                if callable(info_y):
+                    info_y = info_y()
+                return cmp(info_x, info_y)
+            comments.sort(cmp_comments)
+            if reverse:
+                comments.reverse()
+            if limit:
+                comments = comments[:limit]
         return comments
 
 
@@ -394,7 +412,7 @@ class CommentTool(UniqueObject, TypeConstructor, TypeContainer,
 
         if len(proxies) <= 1:
             # delete only isolated comments related to this one
-            comments = self.getComments(proxy)
+            comments = self.getComments(proxy, sorted=False)
             for comment in comments:
                 graph = self._getCommentGraph()
                 comment_resource = self._getCommentResource(comment)

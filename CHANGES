@@ -6,6 +6,7 @@ New features:
 - Adding adapters to get discussable items from capsule documents
 - Adding possibility to comment document versions or version histories, feature
   is only available using Redland graphs
+- Added sort, direction and limit parameters to retrieve comments.
 Bug fixes:
 ~~~~~~~~~~
 - Comment tool properties were not imported correctly

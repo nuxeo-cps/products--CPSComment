@@ -88,10 +88,16 @@ $Id$
 
 <metal:block define-macro="view_comments">
   <tal:block define="
+    sorted sorted|python:True;
+    sort_on sort_on|string:CreationDate;
+    reverse reverse|python:False;
+    limit limit|python:0;
     document nocall:document|nocall:here;
     cluster cluster|string:listed;
     ctool nocall:here/portal_comment;
-    comments python:ctool.getComments(document);
+    comments python:ctool.getComments(document, sorted=sorted,
+                                      sort_on=sort_on, reverse=reverse,
+                                      limit=limit);
     allowed python:ctool.isDiscussionAllowedFor(document);
     here_url document/absolute_url;
     ">
