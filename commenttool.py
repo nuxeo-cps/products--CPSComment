@@ -356,14 +356,12 @@ class CommentTool(UniqueObject, TypeConstructor, TypeContainer,
                     if limit and not sorted and loop >= limit:
                         break
         if sorted:
-            def cmp_comments(x, y):
-                info_x = getattr(aq_base(x), sort_on, x.getId())
-                info_y = getattr(aq_base(y), sort_on, y.getId())
-                if callable(info_x):
-                    info_x = info_x()
-                if callable(info_y):
-                    info_y = info_y()
-                return cmp(info_x, info_y)
+            def comment_sortkey(comment):
+                info = getattr(aq_base(comment), sort_on, comment.getId())
+                if callable(info):
+                    info = info()
+                return info
+            comments.sort(key=comment_sortkey)
             comments.sort(cmp_comments)
             if reverse:
                 comments.reverse()
