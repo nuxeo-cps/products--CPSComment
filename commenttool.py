@@ -362,7 +362,6 @@ class CommentTool(UniqueObject, TypeConstructor, TypeContainer,
                     info = info()
                 return info
             comments.sort(key=comment_sortkey)
-            comments.sort(cmp_comments)
             if reverse:
                 comments.reverse()
             if limit:
