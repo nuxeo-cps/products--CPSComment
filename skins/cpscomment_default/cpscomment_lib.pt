@@ -93,7 +93,7 @@ $Id$
     reverse reverse|python:False;
     limit limit|python:0;
     document nocall:document|nocall:here;
-    cluster cluster|string:listed;
+    cluster cluster|string:listed_actions;
     ctool nocall:here/portal_comment;
     comments python:ctool.getComments(document, sorted=sorted,
                                       sort_on=sort_on, reverse=reverse,

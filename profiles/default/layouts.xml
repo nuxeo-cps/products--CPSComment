@@ -3,4 +3,6 @@
  <object name="comment" meta_type="CPS Layout"/>
  <object name="comment_listed" meta_type="CPS Layout"/>
  <object name="comment_threaded" meta_type="CPS Layout"/>
+ <object name="comment_listed_actions" meta_type="CPS Layout"/>
+ <object name="comment_threaded_actions" meta_type="CPS Layout"/>
 </object>

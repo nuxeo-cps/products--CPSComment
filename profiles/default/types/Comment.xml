@@ -26,6 +26,8 @@
   <element value="metadata:metadata"/>
   <element value="listed:comment_listed"/>
   <element value="threaded:comment_threaded"/>
+  <element value="listed_actions:comment_listed_actions"/>
+  <element value="threaded_actions:comment_threaded_actions"/>
  </property>
  <property name="flexible_layouts"/>
  <property name="storage_methods"/>

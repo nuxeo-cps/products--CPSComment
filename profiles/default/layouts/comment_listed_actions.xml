@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
-<object name="comment_threaded" meta_type="CPS Layout">
+<object name="comment_listed" meta_type="CPS Layout">
  <property name="layout_create_method"></property>
  <property name="layout_edit_method"></property>
- <property name="layout_view_method"></property>
+ <property name="layout_view_method">layout_comment_listed_actions_view</property>
  <property name="style_prefix">layout_default_</property>
  <property name="flexible_widgets"/>
  <property name="validate_values_expr"></property>
