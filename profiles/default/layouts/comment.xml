@@ -48,7 +48,7 @@
   <property name="label">label_title</property>
   <property name="label_edit">label_title</property>
   <property name="is_i18n">True</property>
-  <property name="display_width">72</property>
+  <property name="display_width">60</property>
   <property name="size_max">200</property>
  </widget>
  <widget name="author" meta_type="String Widget">
@@ -70,7 +70,7 @@
   </property>
   <property name="label_edit">cpscomment_label_comment</property>
   <property name="is_i18n">True</property>
-  <property name="width">72</property>
+  <property name="width">60</property>
   <property name="render_format">html</property>
  </widget>
  <table>
