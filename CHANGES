@@ -10,6 +10,8 @@ New features:
 Bug fixes:
 ~~~~~~~~~~
 - Comment tool properties were not imported correctly
+- An error was raised if comment did not exist anymore but was still referenced
+  in relations.
 New internal features:
 ~~~~~~~~~~~~~~~~~~~~~~
 - Set comment graph synchronous

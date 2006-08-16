@@ -348,7 +348,7 @@ class CommentTool(UniqueObject, TypeConstructor, TypeContainer,
                 comment_id = comment_resource.localname
                 try:
                     comment = self.getComment(comment_id, proxy)
-                except Unauthorized:
+                except (Unauthorized, KeyError):
                     pass
                 else:
                     comments.append(comment)
