@@ -101,23 +101,25 @@ $Id$
     allowed python:ctool.isDiscussionAllowedFor(document);
     here_url document/absolute_url;
     ">
-    <tal:block condition="allowed">
-      <div id="show_add_form" style="display:block">
-        <a tal:attributes="
-           href string:javascript:toggleLayers('show_add_form', 'add_form')"
-           i18n:translate="cpscomment_label_show_add_form">
-           Show add form
-        </a>
-      </div>
-      <div id="add_form" style="display:none">
-        <a tal:attributes="
-           href string:javascript:toggleLayers('add_form', 'show_add_form')"
-           i18n:translate="cpscomment_label_hide_add_form">
-           Hide add form
-        </a>
-        <metal:block use-macro="here/cpscomment_lib/macros/comment_add"/>
-      </div>
-    </tal:block>
+    <metal:block define-slot="toggle_comment_add">
+      <tal:block condition="allowed">
+        <div id="show_add_form" style="display:block">
+          <a tal:attributes="
+             href string:javascript:toggleLayers('show_add_form', 'add_form')"
+             i18n:translate="cpscomment_label_show_add_form">
+             Show add form
+          </a>
+        </div>
+        <div id="add_form" style="display:none">
+          <a tal:attributes="
+             href string:javascript:toggleLayers('add_form', 'show_add_form')"
+             i18n:translate="cpscomment_label_hide_add_form">
+             Hide add form
+          </a>
+          <metal:block use-macro="here/cpscomment_lib/macros/comment_add"/>
+        </div>
+      </tal:block>
+    </metal:block>
     <div tal:repeat="comment comments" class="comment_box">
       <tal:block content="structure
         python:comment.render(layout_mode='view', cluster=cluster)">
