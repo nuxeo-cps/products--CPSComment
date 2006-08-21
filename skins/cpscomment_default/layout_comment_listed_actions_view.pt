@@ -7,12 +7,14 @@
   actions python:atool.listFilteredActionsFor(here).get('comment', ());
   ">
   <tal:block repeat="action actions">
-    <a class="button"
-       i18n:translate=""
+    <a i18n:translate=""
        tal:content="action/name"
        tal:attributes="href action/url">
       Action
     </a>
+    <tal:block condition="not:repeat/action/end">
+    -
+    </tal:block>
   </tal:block>
 </tal:block>
 
