@@ -1,3 +1,30 @@
+===========================================================
+Package: CPSComment 1.1.0-abstraction
+===========================================================
+First release built by: anahide at: 2006-10-06T11:58:24
+SVN Tag: https://svn.nuxeo.org/pub/CPS3/products/CPSComment/tags/1.1.0-abstraction
+Build from: https://svn.nuxeo.org/pub/CPS3/products/CPSComment/branches/abstraction@49381
+
+Requires:
+~~~~~~~~~
+-
+New features:
+~~~~~~~~~~~~~
+- Adding adapters to get discussable items from capsule documents
+- Adding possibility to comment document versions or version histories, feature
+  is only available using Redland graphs
+- Added sort, direction and limit parameters to retrieve comments.
+Bug fixes:
+~~~~~~~~~~
+- Comment tool properties were not imported correctly
+- An error was raised if comment did not exist anymore but was still referenced
+  in relations.
+New internal features:
+~~~~~~~~~~~~~~~~~~~~~~
+- Set comment graph synchronous
+- Use adapters when manipulating discussable items
+- Use Zope3 events
+
 *******************************************
 ** CPSComment V1.0.0-abstraction [R1 build 2006/05/23-20:24 by anahide]
 ** SVN URL: https://svn.nuxeo.org/pub/CPS3/products/CPSComment/branches/abstraction Revision: 45893
