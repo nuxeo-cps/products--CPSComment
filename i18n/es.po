@@ -3,25 +3,25 @@ msgstr ""
 "Project-Id-Version: CPSComment\n"
 "POT-Creation-Date: 2006-02-16 14:38default\n"
 "PO-Revision-Date: 2006-03-05 15:33+0100\n"
-"Last-Translator: Jesús Martín <jesusmartin@lasalle.es>\n"
-"Language-Team: español <jesusmartin@lasalle.es>\n"
+"Last-Translator: JesÃºs MartÃ­n <jesusmartin@lasalle.es>\n"
+"Language-Team: espaÃ±ol <jesusmartin@lasalle.es>\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=ISO-8859-15\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Preferred-encodings: latin9 utf-8\n"
-"Domain: default\n"
-"Language-Code: es\n"
-"Language-Name: Spanish\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 "X-Poedit-Language: Spanish\n"
 "X-Poedit-Country: SPAIN\n"
+"Language-Code: es\n"
+"Language-Name: Spanish\n"
+"Domain: default\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Preferred-Encodings: utf-8\n"
 
 #.   <a content="action/name" attributes="href action/url" class="button">
 #.         Action
 #.       </a>
 #: from ../skins/cpscomment_default/layout_comment_listed_view.pt
 msgid "Action"
-msgstr "Acción"
+msgstr "AcciÃ³n"
 
 #.   <a attributes="href string:${here_url}" condition="python:allowed and show_add_form">
 #.         Hide add form
@@ -35,7 +35,7 @@ msgstr "Ocultar el formulario"
 #.       </a>
 #: from ../skins/cpscomment_default/cpscomment_lib.pt
 msgid "cpscomment_label_show_add_form"
-msgstr "Añadir un comentario"
+msgstr "AÃ±adir un comentario"
 
 # types labels
 msgid "portal_type_comment_title"
@@ -68,7 +68,7 @@ msgid "action_disallow_discussion"
 msgstr "No permitir comentarios"
 
 msgid "action_add_comment"
-msgstr "Añadir comentarios"
+msgstr "AÃ±adir comentarios"
 
 msgid "action_reply"
 msgstr "Responder"
