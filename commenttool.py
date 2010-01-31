@@ -108,7 +108,10 @@ class CommentTool(UniqueObject, TypeConstructor, TypeContainer,
     def isDiscussionAllowedFor(self, content):
         """Get boolean indicating whether discussion is allowed for content.
         """
-        discussable = IDiscussableContent(content)
+        try:
+            discussable = IDiscussableContent(content)
+        except TypeError: # happens in error rendering contexts
+            return False
         return discussable.isDiscussionAllowedFor()
 
     # API
@@ -196,7 +199,10 @@ class CommentTool(UniqueObject, TypeConstructor, TypeContainer,
     def isDiscussable(self, object):
         """Return True if given object is a proxy
         """
-        discussable = IDiscussableContent(object)
+        try:
+            discussable = IDiscussableContent(content)
+        except TypeError: # happens in error rendering contexts
+            return False
         return discussable.isDiscussable()
 
 
