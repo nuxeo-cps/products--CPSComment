@@ -196,11 +196,11 @@ class CommentTool(UniqueObject, TypeConstructor, TypeContainer,
 
 
     security.declareProtected(View, 'isDiscussable')
-    def isDiscussable(self, object):
+    def isDiscussable(self, obj):
         """Return True if given object is a proxy
         """
         try:
-            discussable = IDiscussableContent(content)
+            discussable = IDiscussableContent(obj)
         except TypeError: # happens in error rendering contexts
             return False
         return discussable.isDiscussable()
