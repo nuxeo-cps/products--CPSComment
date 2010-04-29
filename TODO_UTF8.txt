@@ -6,5 +6,7 @@ Minimal functional testing ok (activated comment on doc, put a few
 comments, with non iso stuff in them)
 
 
+TODO: upgrade step for existing comments
+
 
 
