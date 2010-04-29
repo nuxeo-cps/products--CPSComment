@@ -1,1 +1,10 @@
-This product didn't exist in previous unicode branch, must be checked
+First round of analysis:
+ - no occurrence of 'iso- or 'ISO-
+ - tests pass in unicode context
+
+Minimal functional testing ok (activated comment on doc, put a few
+comments, with non iso stuff in them)
+
+
+
+
