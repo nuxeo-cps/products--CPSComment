@@ -269,7 +269,7 @@ class CommentTool(UniqueObject, TypeConstructor, TypeContainer,
         graph = self._getCommentGraph()
         graph.add(statements)
 
-        # XXX old-style comment id, we will trigger a Zope 3 Interface when
+        # XXX old-style event, we will trigger a Zope 3 Interface when
         # CPSSubscriptions is compatible with it
         evtool = getEventService(self)
         evtool.notify('comment_created', proxy, {})
@@ -443,6 +443,13 @@ class CommentTool(UniqueObject, TypeConstructor, TypeContainer,
     manage_options = (CMFBTreeFolder.manage_options[:1] +
                       ActionProviderBase.manage_options +
                       CMFBTreeFolder.manage_options[1:])
+
+    # Internal
+    security.declarePrivate('iterValues')
+    def iterValues(self):
+        """Making sure that this is an iterator."""
+        for v in self._tree.itervalues():
+            yield v.__of__(self)
 
 
 InitializeClass(CommentTool)
