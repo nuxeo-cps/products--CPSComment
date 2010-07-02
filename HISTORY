@@ -1,4 +1,22 @@
 ===========================================================
+Package: CPSComment 1.1.1
+===========================================================
+First release built by: gracinet at: 2010-03-14T16:27:48
+Requires
+~~~~~~~~
+-
+New features
+~~~~~~~~~~~~
+-
+Bug fixes
+~~~~~~~~~
+- #1957: migrate i18n files to utf-8
+- #2109: Comment tool breaks error renderings
+New internal features
+~~~~~~~~~~~~~~~~~~~~~
+- 
+
+===========================================================
 Package: CPSComment 1.1.0-abstraction
 ===========================================================
 First release built by: anahide at: 2006-10-06T11:58:24
