@@ -22,19 +22,19 @@ import logging
 
 import transaction
 
-from Products.CPSDocument.upgrade import _upgrade_doc_unicode
+from Products.CPSDocument.upgrade import upgrade_doc_unicode
 
 def upgrade_comments_unicode(portal):
     """Upgrade all comments to unicode."""
     ctool = portal.portal_comment
 
-    logger = logging.getLogger('Products.CPSComment.upgrade.comments_unicode')
+    logger = logging.getLogger('Products.CPSComment.upgrade.unicode')
 
     total = len(ctool)
 
     done = 0
     for doc in ctool.iterValues():
-        if not _upgrade_doc_unicode(doc):
+        if not upgrade_doc_unicode(doc):
             logger.error("Could not upgrade comment with id %s", doc)
             continue
         done += 1
