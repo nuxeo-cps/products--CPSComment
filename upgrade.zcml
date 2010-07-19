@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<!-- $Id$ -->
+
+
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:cps="http://namespaces.nuxeo.org/cps">
+
+  <cps:upgradeStep
+      title="Upgrade comments to unicode"
+      source="3.5.0" destination="3.5.1"
+      handler=".upgrade.upgrade_comments_unicode"
+      checker=".upgrade.profile_installed"
+      />
+
+</configure>
