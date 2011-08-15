@@ -16,12 +16,14 @@
       <p i18n:translate="comment_deletion_message">
         Deletion message
       </p>
-      <form action="cpscomment_delete" method="post">
+      <form action="cpscomment_delete" method="post" class="commentDelete">
+       <p class="buttons">
         <input type="hidden" name="comment_id"
           tal:attributes="value comment_id" />
         <input type="submit" class="destructive"
           value="button_delete"
           i18n:attributes="value" />
+       </p>
       </form>
     </metal:block>
   </metal:block>
