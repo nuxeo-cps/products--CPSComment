@@ -27,8 +27,6 @@ from Testing.ZopeTestCase import ZopeTestCase
 
 from Acquisition import aq_base
 
-from Products.Five import zcml
-
 from Products.CPSDefault.tests.CPSTestCase import CPSZCMLLayer
 from Products.CPSRelation.relationtool import RelationTool
 from Products.CPSRelation.interfaces import IVersionHistoryResource
@@ -74,7 +72,6 @@ class CPSCommentTestCase(ZopeTestCase):
         self.folder._setObject(RelationTool.id, RelationTool())
         self.rtool = getattr(self.folder, RelationTool.id)
         # initialize CPSRelation adapters configuration
-        zcml.load_site()
         graph_id = 'CPSComment'
         self.rtool.addGraph(graph_id, 'IOBTree Graph')
         self.graph = self.rtool.getGraph(graph_id)
