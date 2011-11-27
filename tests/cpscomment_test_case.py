@@ -29,6 +29,7 @@ from Acquisition import aq_base
 
 from Products.Five import zcml
 
+from Products.CPSDefault.tests.CPSTestCase import CPSZCMLLayer
 from Products.CPSRelation.relationtool import RelationTool
 from Products.CPSRelation.interfaces import IVersionHistoryResource
 from Products.CPSRelation.node import PrefixedResource
@@ -55,6 +56,8 @@ COMMENT_PERMISSIONS = [
 
 
 class CPSCommentTestCase(ZopeTestCase):
+
+    layer = CPSZCMLLayer
 
     def setUp(self):
         ZopeTestCase.setUp(self)
